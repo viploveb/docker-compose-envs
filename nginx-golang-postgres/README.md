@@ -17,7 +17,7 @@ This repository demonstrates a full-stack application using Docker Compose with 
 └── docker-compose.yaml # Orchestration file
 ```
 
-The setup defines three services: `proxy` (Nginx), `backend` (Golang), and `db` (Postgres). Nginx routes traffic to the Golang app on port 8080, while the app connects to Postgres.
+The setup defines three services: `proxy` (Nginx), `backend` (Golang), and `db` (Postgres). Nginx routes traffic to the Golang app on port 8000, while the app connects to Postgres.
 
 ## Prerequisites
 
@@ -81,6 +81,6 @@ For production, add healthchecks, secrets, and deploy to Kubernetes with ArgoCD.
 
 ## Troubleshooting
 
-- Port conflict: Change `ports: - "8080:80"` in `docker-compose.yaml`.
+- Port conflict: Change `ports: - "80:80"` in `docker-compose.yaml`.
 - Rebuild: `docker compose down && docker compose up --build`.
 - Volumes override issues: Avoid mounting source code over built binaries.
