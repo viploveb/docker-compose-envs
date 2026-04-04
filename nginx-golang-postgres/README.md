@@ -46,19 +46,22 @@ docker compose ps
 
 Expected output:
 ```
-NAME STATUS PORTS
-nginx-golang-postgres-backend-1 running 8080/tcp
-nginx-golang-postgres-db-1 running (healthy) 5432/tcp
-nginx-golang-postgres-proxy-1 running 0.0.0.0:80->80/tcp
+NAME                              IMAGE                           COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+nginx-golang-postgres-backend-1   nginx-golang-postgres-backend   "/code/bin/backend"      backend   35 seconds ago   Up 19 seconds
+nginx-golang-postgres-db-1        postgres                        "docker-entrypoint.s…"   db        35 seconds ago   Up 29 seconds (healthy)   5432/tcp
+nginx-golang-postgres-proxy-1     nginx                           "/docker-entrypoint.…"   proxy     35 seconds ago   Up 18 seconds             0.0.0.0:80->80/tcp
 ```
 
 Access the app at `http://localhost`.
+`
+["Blog post #0","Blog post #1","Blog post #2","Blog post #3","Blog post #4"]
+`
 
 ## Service Details
 
 ### Backend (Golang)
 - Builds multi-stage from `golang:alpine`.
-- Exposes API on port 8080.
+- Exposes API on port 8000.
 - Connects to `db` via `host=postgres`.
 
 ### Database (Postgres)
@@ -67,7 +70,7 @@ Access the app at `http://localhost`.
 - Persists data in `./postgres-data` volume.
 
 ### Proxy (Nginx)
-- Custom config proxies `/` to `backend:8080`.
+- Custom config proxies `/` to `backend:8000`.
 - Maps host port 80 to container 80.
 
 ## Customization
